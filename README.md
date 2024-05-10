@@ -2,8 +2,7 @@
 
 iFindMem is a RE/Mem scanner framework. iFindMem comes as an app that is installed to your iDevice and a binary which can be executed by typing 'iFindMem' in a Terminal app or over SSH. SearchKit (SearchKit/SearchKit.h) is also included for developers to use to add memory searching in their own projects. The documentation for SearchKit can be found below along with example code in SearchKit/example.c which shows iFindMem finding instances of MH_MAGIC_64 (feedfacf) in memory.
 
-
-iFindMem boilerplate was taken from Rev
+iFindMem boilerplate was taken from PsychoBird's RevelariOS. RevelariOS is no longer maintained. 
 
 ## iFindMem Features:
 
