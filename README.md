@@ -1,8 +1,10 @@
-# RevelariOS - "To Reveal - for iOS"
+# iFindMem
 
-RevelariOS is a memory scanner meant for technical users. RevelariOS comes as an app that is installed to your iDevice and a binary which can be executed by typing 'revelarios' in a Terminal app or over SSH. SearchKit (SearchKit/SearchKit.h) is also included for developers to use to add memory searching in their own projects. The documentation for SearchKit can be found below along with example code in SearchKit/example.c which shows RevelariOS finding instances of MH_MAGIC_64 (feedfacf) in memory.
+iFindMem is a RE/Mem scanner framework. iFindMem comes as an app that is installed to your iDevice and a binary which can be executed by typing 'iFindMem' in a Terminal app or over SSH. SearchKit (SearchKit/SearchKit.h) is also included for developers to use to add memory searching in their own projects. The documentation for SearchKit can be found below along with example code in SearchKit/example.c which shows iFindMem finding instances of MH_MAGIC_64 (feedfacf) in memory.
 
-## RevelariOS Features:
+iFindMem boilerplate was taken from PsychoBird's RevelariOS. RevelariOS is no longer maintained. 
+
+## iFindMem Features:
 
 - Search memory for instances of bytes / strings in memory
 - View found addresses
@@ -10,11 +12,11 @@ RevelariOS is a memory scanner meant for technical users. RevelariOS comes as an
 - Read lines of memory as bytes / characters (CLI only currently)
 - Pause / Resume current task
 
-### Signing RevelariOS
+### Signing iFindMem
 
-RevelariOS isn't running? Make sure to sign RevelariOS with ent.xml! RevelariOS can't operate without proper entitlements.
+iFindMem isn't running? Make sure to sign iFindMem with ent.xml! iFindMem can't operate without proper entitlements.
 
-Use `ldid` for signing RevelariOS. Exactly as typed and as root type `ldid -Sent.xml /path/to/revelarios`
+Use `ldid` for signing iFindMem. Exactly as typed and as root type `ldid -Sent.xml /path/to/iFindMem`
 
 ## Documentation - SearchKit.h
 
@@ -76,8 +78,6 @@ Use `ldid` for signing RevelariOS. Exactly as typed and as root type `ldid -Sent
 
 `result_t (uint8_t)`
 
-![RevelariOS](Pics/revelarios.png)
-![RevelariOS App](Pics/revelariosapp.png)
-# iFindMem
-# iFindMem
-# iFindMem
+![iFindMem](Pics/iFindMem.png)
+![iFindMem App](Pics/iFindMemapp.png)
+
