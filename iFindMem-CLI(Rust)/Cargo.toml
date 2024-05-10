@@ -1,0 +1,11 @@
+[package]
+name = "iFindMem-CLI"
+version = "0.1.0"
+edition = "2021"
+
+[target.'cfg(any(target_os = "macos", target_os = "ios"))'.dependencies.mach]
+version = "0.3"
+
+[dependencies]
+
+mach = "0.3.2"

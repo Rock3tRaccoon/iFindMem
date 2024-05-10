@@ -1,0 +1,8 @@
+Package: com.singsec.ifindmem
+Name: iFindMem
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: An app and CLI tool for scanning memory through bytes arrays or strings. Type 'iFindMem' in a Terminal app for the CLI version. Source code + SearchKit for developers available at https://github.com/RocketRaccoon/iFindMem/
+Maintainer: Rock3t
+Author: Rock3t
+Section: Utilities
