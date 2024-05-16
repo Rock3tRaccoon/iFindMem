@@ -134,6 +134,29 @@ search_t write_data(mach_port_t task, bool isString, vm_address_t addr, char in[
     return WRITE_FAILURE;
 }
 
+search_t search_with_range(mach_port_t task, bool isString, vm_address_t baseaddr, vm_address_t endaddr, vm_address_t *outaddr[SEARCH_MAX], result_t *resultnum, char in[MAX_INPUT_DATA], char end[MAX_INPUT_DATA]) {
+    if (strlen(in) > MAX_INPUT_DATA || strlen(end) > MAX_INPUT_DATA) {
+        printf(ERROR"Data in is too large! (> %d)\n", MAX_INPUT_DATA);
+        return DATA_TOO_LARGE;
+    }
+    vm_address_t out[SEARCH_MAX];
+    //vm_address_t matches[SEARCH_MAX];
+    result_t firstStageResultNum = 0;
+
+    search_data(task, isString, false, baseaddr, endaddr, (vm_address_t **) &out, &firstStageResultNum, in);
+    for (int i=0; i<firstStageResultNum; i++) {
+        vm_address_t tempAddr[SEARCH_MAX];
+        result_t tempNum = 0;
+
+        search_data(task, true, true, out[i], endaddr, (vm_address_t **) &tempAddr, &tempNum, end);
+
+        if (tempNum == 1) printf("From: 0x%lx to: 0x%lx\n", out[i], tempAddr[0]);
+        
+    }
+
+    return SEARCH_SUCCESS;
+}
+
 search_t search_data(mach_port_t task, bool isString, bool quitOnFirstResult, vm_address_t baseaddr, vm_address_t endaddr, vm_address_t *outaddr[SEARCH_MAX], result_t *resultnum, char in[MAX_INPUT_DATA]) {
     if (strlen(in) > MAX_INPUT_DATA) {
         printf(ERROR"Data in is too large! (> %d)\n", MAX_INPUT_DATA);

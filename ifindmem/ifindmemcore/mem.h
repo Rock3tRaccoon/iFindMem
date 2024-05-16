@@ -60,3 +60,13 @@ search_t search_data(mach_port_t task,
                           vm_address_t *outaddr[SEARCH_MAX],
                           result_t *resultnum,
                           char in[MAX_INPUT_DATA]);
+
+
+search_t search_with_range(mach_port_t task,
+                             bool isString, 
+                             vm_address_t baseaddr, 
+                             vm_address_t endaddr, 
+                             vm_address_t *outaddr[SEARCH_MAX], 
+                             result_t *resultnum, 
+                             char in[MAX_INPUT_DATA], 
+                             char end[MAX_INPUT_DATA]);

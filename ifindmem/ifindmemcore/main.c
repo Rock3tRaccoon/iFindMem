@@ -22,13 +22,17 @@ void interact(pid_t pid, mach_port_t task) {
         int charIndex = 0;
         int argIndex = 0;
         int argCharIndex = 0;
+        bool isInQuote = false;
 
         input[strlen(input)] = ' ';
 
         for (int i = 0; i < strlen(input); i++) {
-            if (input[i] == ' ') {
+
+            if (input[i] == '"') isInQuote = !isInQuote;
+            else if (input[i] == ' ' && !isInQuote) {
                 argCharIndex = 0;
                 for (; charIndex < i; charIndex++) {
+                    if (input[charIndex] == '"') continue;
                     args[argIndex][argCharIndex] = input[charIndex];
                     argCharIndex++;
                 }
@@ -38,7 +42,6 @@ void interact(pid_t pid, mach_port_t task) {
             }
         }
 
-
         //HELP
         if (strcmp(args[0], "help\n") == 0) {
             printf(GOOD"List of commands:\n"
@@ -46,6 +49,7 @@ void interact(pid_t pid, mach_port_t task) {
                    MAGENTA "searchstr (ss) " GREEN "[string] " WHITE "- search " GREEN"[string] " WHITE "(ex: ss CBA)\n"
                    MAGENTA "searchone (so) " GREEN "[bytes] " WHITE "- search " GREEN"[bytes] " WHITE "for one result(ex: s 434231)\n"
                    MAGENTA "searchstrone (sso) " GREEN "[string] " WHITE "- search " GREEN"[string] " WHITE "for one result (ex: ss CBA)\n"
+                   MAGENTA "searchrange (sr) " GREEN "[string] [string]" WHITE " - search from " GREEN " [string]" WHITE " to another " GREEN "[string] " WHITE "(ex: sr CBA ABC)\n" 
                    MAGENTA "write (w) " GREEN "[bytes] " WHITE "- write " GREEN"[bytes] " WHITE "to scanned address (ex: w 434231)\n"
                    MAGENTA "writestr (ws) " GREEN "[string] " WHITE "- write " GREEN"[string] " WHITE "to scanned address (ex: ws CBA)\n"
                    MAGENTA "readlines (rl) " GREEN "0x[address] [lines] " WHITE "- read " GREEN "[lines] " WHITE "of " GREEN "[address]"WHITE"\n"
@@ -143,6 +147,15 @@ void interact(pid_t pid, mach_port_t task) {
         }
         else if (strcmp(args[0], "searchstrone\n") == 0 || strcmp(args[0], "sso\n") == 0) {
             printf(ERROR"Not enough arguments for searchstr!\n");
+        }
+        else if ((strcmp(args[0], "searchrange") == 0 || strcmp(args[0], "sr") == 0) && args[1][0] != '\0' && args[2][0] != '\0') {
+            get_region_size(task, &base, &end);
+            printf(GOOD"Memory Range = 0x%lx - 0x%lx\n", base, end);
+            printf(GOOD"Finding string - %s...%s\n", args[1], args[2]);
+            search_with_range(task, true, base, end, (vm_address_t **)&out, &resultnum, args[1], args[2]);
+        }
+        else if (strcmp(args[0], "searchrange\n") == 0 || strcmp(args[0], "sr\n") == 0) {
+            printf(ERROR"Not enough arguments for searchrange!\n");
         }
 
 
