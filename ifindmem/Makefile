@@ -14,6 +14,6 @@ iFindMemory_FRAMEWORKS = UIKit CoreGraphics
 include $(THEOS_MAKE_PATH)/application.mk
 SUBPROJECTS += ifindmemcore/
 include $(THEOS_MAKE_PATH)/aggregate.mk
-THEOS_DEVICE_IP = iPhoneRoot
+THEOS_DEVICE_IP = localhost
 THEOS_DEVICE_PORT = 2222
 THEOS_DEVICE_USER = root
